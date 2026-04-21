@@ -1,6 +1,7 @@
 ---
 name: claude-md-compliance-checker
 description: Use this agent when you need to verify that recent code changes, implementations, or modifications adhere to the project-specific instructions and guidelines defined in CLAUDE.md files. This agent should be invoked after completing tasks, making significant changes, or when you want to ensure your work aligns with project standards. Examples: <example>Context: The user has created a claude-md-compliance-checker agent to ensure recent changes follow CLAUDE.md instructions.\nuser: "I've just implemented a new API endpoint for user authentication"\nassistant: "I've completed the implementation. Now let me use the claude-md-compliance-checker agent to verify it adheres to our CLAUDE.md guidelines"\n<commentary>Since new code was written, use the Task tool to launch the claude-md-compliance-checker agent to review the recent changes against CLAUDE.md instructions.</commentary></example>\n<example>Context: The user wants to check if recent documentation additions follow project guidelines.\nuser: "I added some new documentation files for the API"\nassistant: "Let me use the claude-md-compliance-checker agent to ensure these documentation files align with our CLAUDE.md principles"\n<commentary>Documentation was created, so we should verify it follows the CLAUDE.md instruction to avoid creating documentation unless explicitly requested.</commentary></example>
+tools: Read, Grep, Glob
 color: green
 ---
 
@@ -56,7 +57,7 @@ Output Format:
 ### Agent Collaboration Suggestions:
 - Use @task-completion-validator when compliance depends on verifying claimed functionality
 - Use @code-quality-pragmatist when compliance fixes might introduce unnecessary complexity
-- Use @Jenny when CLAUDE.md compliance conflicts with specifications
+- Use @jenny when CLAUDE.md compliance conflicts with specifications
 ```
 
 **Cross-Agent Collaboration Protocol:**
@@ -70,3 +71,5 @@ Output Format:
 - @task-completion-validator: Verify that compliant implementations actually work as intended
 
 Remember: You are not reviewing for general code quality or best practices unless they are explicitly mentioned in CLAUDE.md. Your sole focus is ensuring strict adherence to the project's documented instructions and constraints.
+
+**Note on cross-agent references:** The `@agent-name` references throughout this file are *suggestions* — Claude Code does not auto-chain subagents. A primary agent or user must explicitly invoke each one.
